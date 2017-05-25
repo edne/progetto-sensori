@@ -1,12 +1,18 @@
 import logging
+import configparser
+
 import smtplib
 from email.message import EmailMessage
 
-# TODO: leggere da un file di configurazione
-debug = True
-api_key = 'XXXXXXX'
-from_mail = 'sensorefumo_noreply@progetto.sensori'
-dest_mail = 'XXXXX'
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+debug = config['GENERAL'].getboolean('debug')
+api_key = config['GENERAL']['api_key']
+from_mail = config['GENERAL']['from_mail']
+dest_mail = config['GENERAL']['dest_mail']
+
 
 # Per stampare informazioni
 if debug:
